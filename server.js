@@ -4,6 +4,7 @@ const querystring = require("querystring");
 const app = express();
 const schedule = require("node-schedule");
 const env = require("dotenv");
+const { format } = require("date-fns");
 env.config();
 
 var options = {
@@ -29,7 +30,10 @@ schedule.scheduleJob("covid", "*/1 * * * *", () => {
           "Content-Type": "application/x-www-form-urlencoded",
         },
         data: querystring.stringify({
-          message: `ยอดผู้ป่วยโควิด${response.data[0].confirmed}`,
+          message: `ยอดผู้ป่วยโควิด วันที่${format(
+            new Date(),
+            "yyyy-MM-dd"
+          )} จำนวน ${response.data[0].confirmed}`,
         }),
       });
     })
