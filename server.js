@@ -3,6 +3,8 @@ const axios = require("axios");
 const querystring = require("querystring");
 const app = express();
 const schedule = require("node-schedule");
+const env = require("dotenv");
+env.config();
 
 var options = {
   method: "GET",
@@ -47,8 +49,8 @@ schedule.scheduleJob("covid", "*/1 * * * *", () => {
 //   data: querystring.stringify({ message: covid }),
 // });
 
-app.listen(2000, () => {
-  console.log("server is running on port", 2000);
+app.listen(process.env.PORT, () => {
+  console.log("server is running on port", process.env.PORT);
 });
 
 // *    *    *    *    *    *
