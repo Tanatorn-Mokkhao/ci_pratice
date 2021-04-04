@@ -17,7 +17,7 @@ var options = {
   },
 };
 
-schedule.scheduleJob("covid", "00 00 13 * * 0-6'", () => {
+schedule.scheduleJob("covid", "*/1 * *", () => {
   axios
     .request(options)
     .then(function (response) {
